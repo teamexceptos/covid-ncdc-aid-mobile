@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
+import com.exceptos.covidaid.models.total_model
 import kotlinx.android.synthetic.main.activity_state.*
 
 class StatesActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class StatesActivity : AppCompatActivity() {
     val mActivity: Activity = this@StatesActivity
     private var mAdapter: MainAdapter? = null
     var ng : ng_model? = null
+    var ttl : total_model? = null
 
     val ng_states = listOf(
         "Abia",
@@ -73,7 +75,7 @@ class StatesActivity : AppCompatActivity() {
         if(haveNetworkConnection()) {
 
 
-            val serviceAPI = ServiceAPI("", object : OnAPIDataGotten {
+            val serviceAPI = ServiceAPI("total", object : OnAPIDataGotten {
 
                 override fun state_json_loaded(stateModel: state_model) {
 
@@ -81,17 +83,38 @@ class StatesActivity : AppCompatActivity() {
 
                 override fun ng_json_loaded(ngModel: ng_model) {
 
-                    ng = ngModel
+                    if(!ngModel.No_Confirmed_cases.isNullOrEmpty()) {
 
-                    progress_ng_data.visibility = View.GONE
-                    ng_data_view.visibility = View.VISIBLE
+                        ng = ngModel
 
-                    current_update_date.text = ngModel.Date
-                    discharged_cases.text = ngModel.No_Discharged!!
-                    total_tested_sample.text = ngModel.No_Samples_Tested!!
-                    total_comfirmed.text = ngModel.No_Confirmed_cases!!
-                    deaths.text = ngModel.No_of_Deaths!!
+                        progress_ng_data.visibility = View.GONE
+                        ng_data_view.visibility = View.VISIBLE
 
+                        current_update_date.text = ngModel.Date
+                        discharged_cases.text = ngModel.No_Discharged!!
+                        total_tested_sample.text = ngModel.No_Samples_Tested!!
+                        total_comfirmed.text = ngModel.No_Confirmed_cases!!
+                        deaths.text = ngModel.No_of_Deaths!!
+
+                    }
+                }
+
+                override fun total_json_loaded(totalModel: total_model) {
+
+                    if(!totalModel.No_of_Active_Cases.isNullOrEmpty()) {
+
+                        ttl = totalModel
+
+                        progress_ng_data.visibility = View.GONE
+                        ng_data_view.visibility = View.VISIBLE
+
+                        current_update_date.text = totalModel.Date
+                        discharged_cases.text = totalModel.No_Discharged!!
+                        total_tested_sample.text = totalModel.No_of_Active_Cases!!
+                        total_comfirmed.text = totalModel.No_of_Lab_Confirmed_cases!!
+                        deaths.text = totalModel.No_of_Deaths!!
+
+                    }
                 }
 
                 override fun empty_json(string: String) {
@@ -142,9 +165,16 @@ class StatesActivity : AppCompatActivity() {
                 if(progress_ng_data.visibility != View.VISIBLE) {
 
                     val intent = Intent(mActivity, StateDetailsActivity::class.java)
-                    intent.putExtra("ng", ng)
+
+                    if(ng != null) {
+                        intent.putExtra("ng", ng)
+                    } else {
+                        intent.putExtra("ttl", ttl)
+                    }
+
                     intent.putExtra("state", ArrayList(ng_states)[position])
                     startActivity(intent)
+
                 } else {
 
                     Toast.makeText(mActivity, "NCDC Data is still loading, Check your connection or wait alittle", Toast.LENGTH_LONG).show()

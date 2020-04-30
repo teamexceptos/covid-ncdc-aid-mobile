@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat.getSystemService
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
+import com.exceptos.covidaid.models.total_model
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -31,7 +32,7 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
             } else {
 
-                URL(url)
+                URL("$url")
             }
 
             val connection = Url.openConnection() as HttpURLConnection
@@ -66,8 +67,16 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
             if(result!!.isNotEmpty()) {
 
-                val stateModel: state_model = Gson().fromJson(result.toString(), state_model::class.java)
-                listener.state_json_loaded(stateModel)
+                if(s_value == "total") {
+
+                    val totalModel: total_model = Gson().fromJson(result.toString(), total_model::class.java)
+                    listener.total_json_loaded(totalModel)
+
+                } else {
+
+                    val stateModel: state_model = Gson().fromJson(result.toString(), state_model::class.java)
+                    listener.state_json_loaded(stateModel)
+                }
 
             } else {
 
@@ -76,8 +85,16 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
         } else {
 
-            val ngModel: ng_model = Gson().fromJson(result.toString(), ng_model::class.java)
-            listener.ng_json_loaded(ngModel)
+            if(result!!.isNotEmpty()) {
+
+                val ngModel: ng_model = Gson().fromJson(result.toString(), ng_model::class.java)
+                listener.ng_json_loaded(ngModel)
+
+            } else {
+
+                listener.empty_json("No case has been reported")
+            }
+
         }
 
     }
