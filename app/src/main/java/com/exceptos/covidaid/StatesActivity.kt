@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.exceptos.covidaid.models.ng_highlights
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
 import com.exceptos.covidaid.models.total_model
@@ -115,6 +116,10 @@ class StatesActivity : AppCompatActivity() {
                         deaths.text = totalModel.No_of_Deaths!!
 
                     }
+                }
+
+                override fun highlights_json_loaded(ngHighlights: ng_highlights) {
+
                 }
 
                 override fun empty_json(string: String) {

@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.os.AsyncTask
 import android.util.Log
 import androidx.core.content.ContextCompat.getSystemService
+import com.exceptos.covidaid.models.ng_highlights
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
 import com.exceptos.covidaid.models.total_model
@@ -26,13 +27,20 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
         try {
 
-            Url = if (s_value.isNotEmpty()) {
+            Url = if(s_value == "highlights") {
 
-                URL("$url/search/$s_value")
+                URL("$url/$s_value")
 
             } else {
 
-                URL("$url")
+                if (s_value.isNotEmpty()) {
+
+                    URL("$url/search/$s_value")
+
+                } else {
+
+                    URL("$url")
+                }
             }
 
             val connection = Url.openConnection() as HttpURLConnection
@@ -67,15 +75,25 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
             if(result!!.isNotEmpty()) {
 
-                if(s_value == "total") {
+                when (s_value) {
 
-                    val totalModel: total_model = Gson().fromJson(result.toString(), total_model::class.java)
-                    listener.total_json_loaded(totalModel)
+                    "total" -> {
 
-                } else {
+                        val totalModel: total_model = Gson().fromJson(result.toString(), total_model::class.java)
+                        listener.total_json_loaded(totalModel)
+                    }
 
-                    val stateModel: state_model = Gson().fromJson(result.toString(), state_model::class.java)
-                    listener.state_json_loaded(stateModel)
+                    "highlights" -> {
+
+                        val ngHighlights: ng_highlights = Gson().fromJson(result.toString(), ng_highlights::class.java)
+                        listener.highlights_json_loaded(ngHighlights)
+                    }
+
+                    else -> {
+
+                        val stateModel: state_model = Gson().fromJson(result.toString(), state_model::class.java)
+                        listener.state_json_loaded(stateModel)
+                    }
                 }
 
             } else {
@@ -92,7 +110,7 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
             } else {
 
-                listener.empty_json("No case has been reported")
+                listener.empty_json("No response made yet")
             }
 
         }
