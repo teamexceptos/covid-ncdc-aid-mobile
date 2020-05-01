@@ -2,6 +2,7 @@ package com.exceptos.covidaid
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.ConnectivityManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.exceptos.covidaid.models.ng_highlights
 import com.exceptos.covidaid.models.total_model
 
 
@@ -105,6 +107,10 @@ class StateDetailsActivity : AppCompatActivity() {
 
                 }
 
+                override fun highlights_json_loaded(ngHighlights: ng_highlights) {
+
+                }
+
                 override fun empty_json(string: String) {
 
                     Toast.makeText(mActivity, string, Toast.LENGTH_LONG).show()
@@ -122,6 +128,10 @@ class StateDetailsActivity : AppCompatActivity() {
 
             onBackPressed()
             finish()
+        }
+
+        reduce_spread_guide.setOnClickListener {
+            startActivity(Intent(mActivity, StoppingtheSpreadActivity::class.java))
         }
 
     }

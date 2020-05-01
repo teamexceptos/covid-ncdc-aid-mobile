@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_alignParentStart="false"
     android:layout_alignParentLeft="false">
+
+    <ImageView
+        android:id="@+id/back_pressed"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="15dp"
+        app:srcCompat="@drawable/ic_back_black_24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,12 +21,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="100dp"
+            android:id="@+id/reduce_spread_guide"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
             android:background="@drawable/bottom_border"
-            android:text="How to help stop the spread of covid?"
+            android:text="How to help stop the spread of COVID-19?"
             android:textAlignment="textStart"
             android:textColor="@android:color/black"
             android:textSize="21sp"
@@ -107,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="No. of Active Cases"
+                        android:text="No. of Active Cases:"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -148,7 +156,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="No. of Lab Confirmed cases"
+                        android:text="No. of Lab Confirmed cases:"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -166,7 +174,6 @@
                 <com.exceptos.covidaid.CustomProgressBar
                     android:id="@+id/total_comfirmed_bar"
                     android:layout_width="match_parent"
-                    android:background="@drawable/bottom_border"
                     android:layout_height="8dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="7dp"
@@ -190,7 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="No. of Deaths"
+                        android:text="No. of Deaths:"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
