@@ -20,6 +20,9 @@ class ng_model : Serializable {
     @SerializedName("Discharged")
     var No_Discharged: String? = ""
 
+    @SerializedName("Active_Cases")
+    var Active_cases: String? = ""
+
     @SerializedName("message")
     var msg: String? = ""
 

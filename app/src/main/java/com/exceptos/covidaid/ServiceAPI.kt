@@ -1,14 +1,10 @@
 package com.exceptos.covidaid
 
-import android.content.Context
-import android.net.ConnectivityManager
 import android.os.AsyncTask
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import com.exceptos.covidaid.models.ng_highlights
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
-import com.exceptos.covidaid.models.total_model
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -27,20 +23,13 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
 
         try {
 
-            Url = if(s_value == "highlights") {
+            Url = if (s_value.isNotEmpty()) {
 
                 URL("$url/$s_value")
 
             } else {
 
-                if (s_value.isNotEmpty()) {
-
-                    URL("$url/search/$s_value")
-
-                } else {
-
-                    URL("$url")
-                }
+                URL("$url")
             }
 
             val connection = Url.openConnection() as HttpURLConnection
@@ -76,12 +65,6 @@ class ServiceAPI(search_value: String, private val listener: OnAPIDataGotten): A
             if(result!!.isNotEmpty()) {
 
                 when (s_value) {
-
-                    "total" -> {
-
-                        val totalModel: total_model = Gson().fromJson(result.toString(), total_model::class.java)
-                        listener.total_json_loaded(totalModel)
-                    }
 
                     "highlights" -> {
 

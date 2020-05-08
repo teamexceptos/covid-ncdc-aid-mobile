@@ -38,11 +38,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:layout_marginRight="21dp"
-            android:text="State"
             android:textAlignment="viewEnd"
             android:textColor="@android:color/black"
             android:textSize="36sp"
             android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/state_details_progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="21dp"
                 android:layout_marginBottom="29dp"
-                android:text="TextView"
                 android:textAlignment="viewEnd"
                 android:textStyle="bold" />
 
@@ -156,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:text="No. of Lab Confirmed cases:"
+                        android:text="No. of Confirmed cases:"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 

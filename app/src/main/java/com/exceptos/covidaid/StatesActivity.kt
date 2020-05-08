@@ -6,25 +6,24 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exceptos.covidaid.models.ng_highlights
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
-import com.exceptos.covidaid.models.total_model
 import kotlinx.android.synthetic.main.activity_state.*
+import kotlinx.android.synthetic.main.ng_total_details_counts.*
+import org.jetbrains.anko.doAsync
 
 class StatesActivity : AppCompatActivity() {
 
     val mActivity: Activity = this@StatesActivity
     private var mAdapter: MainAdapter? = null
     var ng : ng_model? = null
-    var ttl : total_model? = null
 
     val ng_states = listOf(
         "Abia",
@@ -41,7 +40,7 @@ class StatesActivity : AppCompatActivity() {
         "Edo",
         "Ekiti",
         "Enugu",
-        "Abuja",
+        "FCT - Abuja",
         "Gombe",
         "Imo",
         "Jigawa",
@@ -76,7 +75,7 @@ class StatesActivity : AppCompatActivity() {
         if(haveNetworkConnection()) {
 
 
-            val serviceAPI = ServiceAPI("total", object : OnAPIDataGotten {
+            val serviceAPI = ServiceAPI("", object : OnAPIDataGotten {
 
                 override fun state_json_loaded(stateModel: state_model) {
 
@@ -89,31 +88,14 @@ class StatesActivity : AppCompatActivity() {
                         ng = ngModel
 
                         progress_ng_data.visibility = View.GONE
-                        ng_data_view.visibility = View.VISIBLE
+                        total_ng_data.visibility = View.VISIBLE
 
                         current_update_date.text = ngModel.Date
-                        discharged_cases.text = ngModel.No_Discharged!!
-                        total_tested_sample.text = ngModel.No_Samples_Tested!!
-                        total_comfirmed.text = ngModel.No_Confirmed_cases!!
-                        deaths.text = ngModel.No_of_Deaths!!
-
-                    }
-                }
-
-                override fun total_json_loaded(totalModel: total_model) {
-
-                    if(!totalModel.No_of_Active_Cases.isNullOrEmpty()) {
-
-                        ttl = totalModel
-
-                        progress_ng_data.visibility = View.GONE
-                        ng_data_view.visibility = View.VISIBLE
-
-                        current_update_date.text = totalModel.Date
-                        discharged_cases.text = totalModel.No_Discharged!!
-                        total_tested_sample.text = totalModel.No_of_Active_Cases!!
-                        total_comfirmed.text = totalModel.No_of_Lab_Confirmed_cases!!
-                        deaths.text = totalModel.No_of_Deaths!!
+                        discharged.text = ngModel.No_Discharged!!
+                        samples_tested.text = ngModel.No_Samples_Tested!!
+                        comfired_cases.text = ngModel.No_Confirmed_cases!!
+                        death.text = ngModel.No_of_Deaths!!
+                        active_cases.text = ngModel.Active_cases!!
 
                     }
                 }
@@ -134,6 +116,10 @@ class StatesActivity : AppCompatActivity() {
         }
 
         initialize_rv(ArrayList(ng_states))
+
+        highlights.setOnClickListener {
+            showBottomSheetforHighlights()
+        }
 
     }
 
@@ -156,6 +142,35 @@ class StatesActivity : AppCompatActivity() {
         return haveConnectedWifi || haveConnectedMobile
     }
 
+    private fun showBottomSheetforHighlights() {
+
+        val serviceAPIforHighlights = ServiceAPI("highlights", object : OnAPIDataGotten {
+
+            override fun state_json_loaded(stateModel: state_model) {
+
+            }
+
+            override fun ng_json_loaded(ngModel: ng_model) {
+
+            }
+
+            override fun highlights_json_loaded(ngHighlights: ng_highlights) {
+
+                mActivity as FragmentActivity
+
+                val bottomSheetDialog = ModalBottomSheet(ngHighlights.highlights!!)
+                bottomSheetDialog.show(this@StatesActivity.mActivity.supportFragmentManager, ModalBottomSheet::class.java.simpleName)
+
+            }
+
+            override fun empty_json(string: String) {
+
+            }
+        })
+        serviceAPIforHighlights.execute()
+
+    }
+
     private fun initialize_rv(array: ArrayList<String>) {
 
         state_lists.visibility = View.VISIBLE
@@ -173,12 +188,18 @@ class StatesActivity : AppCompatActivity() {
 
                     if(ng != null) {
                         intent.putExtra("ng", ng)
-                    } else {
-                        intent.putExtra("ttl", ttl)
                     }
 
-                    intent.putExtra("state", ArrayList(ng_states)[position])
-                    startActivity(intent)
+                    if(ArrayList(ng_states)[position] == "FCT - Abuja") {
+
+                        intent.putExtra("state", "fct")
+                        startActivity(intent)
+
+                    } else  {
+
+                        intent.putExtra("state", ArrayList(ng_states)[position])
+                        startActivity(intent)
+                    }
 
                 } else {
 
