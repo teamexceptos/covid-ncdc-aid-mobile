@@ -61,10 +61,10 @@ class StateDetailsActivity : AppCompatActivity() {
                     total_comfirmed_bar.setMaxValue(ngModel!!.No_Confirmed_cases!!.trim().replace(",", "").toInt())
                     deaths_bar.setMaxValue(ngModel!!.No_of_Deaths!!.trim().replace(",", "").toInt())
 
-                    discharged_cases_bar.setProgressColor(getColor(android.R.color.holo_green_dark))
-                    s_active_cases_bar.setProgressColor(getColor(android.R.color.holo_purple))
-                    total_comfirmed_bar.setProgressColor(getColor(android.R.color.holo_orange_light))
-                    deaths_bar.setProgressColor(getColor(android.R.color.holo_red_light))
+                    discharged_cases_bar.setProgressColor(getColor(android.R.color.darker_gray))
+                    s_active_cases_bar.setProgressColor(getColor(android.R.color.holo_green_light))
+                    total_comfirmed_bar.setProgressColor(getColor(android.R.color.holo_blue_dark))
+                    deaths_bar.setProgressColor(getColor(android.R.color.holo_red_dark))
 
                     discharged_cases_bar.setValue(stateModel.No_Discharged!!.trim().replace(",", "").toInt())
                     s_active_cases_bar.setValue(stateModel.No_of_Active_Cases!!.trim().replace(",", "").toInt())
