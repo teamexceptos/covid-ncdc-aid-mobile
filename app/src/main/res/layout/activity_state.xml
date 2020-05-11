@@ -76,8 +76,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/state_lists"
-        tools:listitem="@layout/state_list_view_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp" />
+        android:padding="15dp"
+        tools:listitem="@layout/state_list_view_holder" />
 </LinearLayout>
