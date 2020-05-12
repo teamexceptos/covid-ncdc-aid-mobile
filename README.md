@@ -8,5 +8,5 @@ Current Screens
 
 <img src="app/screens/scrn_1.png" height="400" alt="Screenshot"/> <img src="app/screens/scrn_2.png" height="400" alt="Screenshot"/>
 <img src="app/screens/scrn_3.png" height="400" alt="Screenshot"/> <img src="app/screens/scrn_4.png" height="400" alt="Screenshot"/>
-<img src="app/screens/scrn_5.png" height="400" alt="Screenshot"/>
+<img src="app/screens/scrn_5.png" height="400" alt="Screenshot"/> <img src="app/screens/scrn_6.png" height="400" alt="Screenshot"/>
 

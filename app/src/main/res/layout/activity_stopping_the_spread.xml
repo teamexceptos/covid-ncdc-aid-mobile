@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:padding="16dp"
-                android:text="Acknowledged? Spread this and Let's stop this virus together."
+                android:text="Tell others..."
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="25dp"

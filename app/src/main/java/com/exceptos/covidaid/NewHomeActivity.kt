@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -58,6 +59,8 @@ class NewHomeActivity : AppCompatActivity() {
                 override fun ng_json_loaded(ngModel: ng_model) {
 
                     if(!ngModel.No_Confirmed_cases.isNullOrEmpty()) {
+
+                        progressBar.visibility = View.GONE
 
                         ng = ngModel
 
@@ -127,9 +130,6 @@ class NewHomeActivity : AppCompatActivity() {
                                 death_perc.text = Prefs.total_deaths_perc
                             }
                         }
-
-//                        progress_ng_data.visibility = View.GONE
-//                        total_ng_data.visibility = View.VISIBLE
 
                         current_update_date.text = ngModel.Date
                         discharged.text = ngModel.No_Discharged!!
