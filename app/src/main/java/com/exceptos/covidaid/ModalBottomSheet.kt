@@ -32,7 +32,7 @@ class ModalBottomSheet (ncdc_highlights_value: String): BottomSheetDialogFragmen
         if(!highlights_value.isNullOrEmpty()) {
 
             highlight_progress.visibility = View.GONE
-            ncdc_highlights.text = highlights_value
+            ncdc_highlights.text = highlights_value.replace("\nClick here to read more\n", "").replace("\nHighlights\n", "")
 
         }
     }
