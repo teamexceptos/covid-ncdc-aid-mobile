@@ -3,7 +3,7 @@ package com.exceptos.covidaid
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.TextView
@@ -22,21 +22,26 @@ import com.exceptos.covidaid.SharedprefManager.total_comfired_cases_perc
 import com.exceptos.covidaid.SharedprefManager.total_sample_tested_perc
 import com.exceptos.covidaid.SharedprefManager.total_discharged_perc
 import com.exceptos.covidaid.SharedprefManager.total_deaths_perc
+import com.exceptos.covidaid.SharedprefManager.state_change_1
+import com.exceptos.covidaid.SharedprefManager.state_change_2
+import com.exceptos.covidaid.SharedprefManager.state_change_3
+import com.exceptos.covidaid.SharedprefManager.state_change_4
+import com.exceptos.covidaid.SharedprefManager.state_change_5
 import com.exceptos.covidaid.models.ng_highlights
 import com.exceptos.covidaid.models.ng_model
 import com.exceptos.covidaid.models.state_model
 import kotlinx.android.synthetic.main.activity_new_home.*
 
-class StatesActivity : AppCompatActivity() {
+class NewHomeActivity : AppCompatActivity() {
 
-    val mActivity: Activity = this@StatesActivity
+    val mActivity: Activity = this@NewHomeActivity
 
     var ng : ng_model? = null
 
     @SuppressLint("DefaultLocale", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.statusBarColor = ContextCompat.getColor(this, android.R.color.holo_green_light)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.backgroundColor)
 
         setContentView(R.layout.activity_new_home)
 
@@ -74,7 +79,7 @@ class StatesActivity : AppCompatActivity() {
 
                             if(Prefs.total_comfired_cases != turntoInt(ngModel.No_Confirmed_cases!!)) {
 
-                                comfired_cases_perc.text = ((difference(new = turntoInt(ngModel.No_Confirmed_cases!!), old = Prefs.total_comfired_cases))/100).toString() + "%"
+                                comfired_cases_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_Confirmed_cases!!), old = Prefs.total_comfired_cases)/100)
                                 Prefs.total_comfired_cases_perc = comfired_cases_perc.text.toString()
 
                             } else {
@@ -84,7 +89,7 @@ class StatesActivity : AppCompatActivity() {
 
                             if(Prefs.total_active_cases != turntoInt(ngModel.Active_cases!!)) {
 
-                                active_cases_perc.text = ((difference(new = turntoInt(ngModel.Active_cases!!), old = Prefs.total_active_cases))/100).toString() + "%"
+                                active_cases_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.Active_cases!!), old = Prefs.total_active_cases)/100)
                                 Prefs.total_active_cases_perc = active_cases_perc.text.toString()
 
                             } else {
@@ -94,7 +99,7 @@ class StatesActivity : AppCompatActivity() {
 
                             if(Prefs.total_discharged != turntoInt(ngModel.No_Discharged!!)) {
 
-                                discharged_perc.text = ((difference(new = turntoInt(ngModel.No_Discharged!!), old = Prefs.total_discharged))/100).toString() + "%"
+                                discharged_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_Discharged!!), old = Prefs.total_discharged)/100)
                                 Prefs.total_discharged_perc = discharged_perc.text.toString()
 
                             } else {
@@ -104,7 +109,7 @@ class StatesActivity : AppCompatActivity() {
 
                             if(Prefs.total_sample_tested != turntoInt(ngModel.No_Samples_Tested!!)) {
 
-                                samples_tested_perc.text = ((difference(new = turntoInt(ngModel.No_Samples_Tested!!), old = Prefs.total_sample_tested))/100).toString() + "%"
+                                samples_tested_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_Samples_Tested!!), old = Prefs.total_sample_tested)/100)
                                 Prefs.total_sample_tested_perc = samples_tested_perc.text.toString()
 
                             } else {
@@ -114,14 +119,13 @@ class StatesActivity : AppCompatActivity() {
 
                             if(Prefs.total_deaths != turntoInt(ngModel.No_of_Deaths!!)) {
 
-                                death_perc.text = ((difference(new = turntoInt(ngModel.No_of_Deaths!!), old = Prefs.total_deaths))/100).toString() + "%"
+                                death_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_of_Deaths!!), old = Prefs.total_deaths)/100)
                                 Prefs.total_deaths_perc = death_perc.text.toString()
 
                             } else {
 
                                 death_perc.text = Prefs.total_deaths_perc
                             }
-
                         }
 
 //                        progress_ng_data.visibility = View.GONE
@@ -147,14 +151,26 @@ class StatesActivity : AppCompatActivity() {
             })
             serviceAPI.execute()
 
+            topStates("Lagos", state_1_new, state_1, Prefs!!.state_change_1)
+            topStates("Kano", state_2_new, state_2, Prefs.state_change_2)
+            topStates("FCT", state_3_new, state_3, Prefs.state_change_3)
+            topStates("Katsina", state_4_new, state_4, Prefs.state_change_4)
+            topStates("Borno", state_5_new, state_5, Prefs.state_change_5)
+
+            home_highlights.setOnClickListener {
+
+            showBottomSheetforHighlights()
+
+            }
+
+            all_states.setOnClickListener {
+                startActivity(Intent(mActivity, AllStatesActivity::class.java))
+            }
+
         } else {
 
             Toast.makeText(mActivity, "No internet connection, Connect and restart application", Toast.LENGTH_LONG).show()
         }
-
-//        highlights.setOnClickListener {
-//            showBottomSheetforHighlights()
-//        }
 
     }
 
@@ -166,22 +182,116 @@ class StatesActivity : AppCompatActivity() {
         return value.trim().replace(",", "").toInt()
     }
 
-    fun topStates(state: String, textView: TextView, oldValue: Int) : Int {
+    fun increase_decrease_format_with_perc(value: Int) : String {
+
+        return if(value >= 0) {
+
+            "+$value%"
+
+        } else {
+
+            "$value%"
+        }
+    }
+
+    fun increase_decrease_format(value: Int) : String {
+
+        return if(value >= 0) {
+
+            "+$value"
+
+        } else {
+
+            "$value"
+        }
+    }
+
+    @SuppressLint("DefaultLocale", "SetTextI18n")
+    fun topStates(state: String, textView: TextView, labeltextView: TextView, oldValue: Int) {
 
         var newDifference = 0
+        val Prefs = customPreference(this, "covid_data")
 
         val serviceAPI = ServiceAPI(state, object : OnAPIDataGotten {
 
+            @SuppressLint("SetTextI18n")
             override fun state_json_loaded(stateModel: state_model) {
 
-                turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
+                labeltextView.text = state
 
-                if(oldValue == 0 ) {
+                when (state) {
+                    "Lagos" -> {
 
-                    newDifference = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
+                        val diffValue = difference(new = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!), old = oldValue)
 
-                } else {
-                    newDifference = difference(new = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!), old = oldValue)
+                        if(diffValue != 0) {
+
+                            Prefs!!.state_change_1 = diffValue
+                            textView.text = increase_decrease_format(diffValue)
+
+                        } else {
+
+                            textView.text = increase_decrease_format(diffValue)
+                        }
+
+                    }
+                    "Kano" -> {
+
+                        val diffValue = difference(new = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!), old = oldValue)
+
+                        if(diffValue != 0) {
+
+                            Prefs!!.state_change_2 = diffValue
+                            textView.text = increase_decrease_format(diffValue)
+
+                        } else {
+
+                            textView.text = increase_decrease_format(diffValue)
+                        }
+
+                    }
+                    "FCT" -> {
+
+                        val diffValue = difference(new = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!), old = oldValue)
+
+                        if(diffValue != 0) {
+
+                            Prefs!!.state_change_3 = diffValue
+                            textView.text = increase_decrease_format(diffValue)
+
+                        } else {
+
+                            textView.text = increase_decrease_format(diffValue)
+                        }
+                    }
+                    "Katsina" -> {
+
+                        val diffValue = difference(new = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!), old = oldValue)
+
+                        if(diffValue != 0) {
+
+                            Prefs!!.state_change_4 = diffValue
+                            textView.text = increase_decrease_format(diffValue)
+
+                        } else {
+
+                            textView.text = increase_decrease_format(diffValue)
+                        }
+                    }
+                    "Borno" -> {
+
+                        val diffValue = difference(new = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!), old = oldValue)
+
+                        if(diffValue != 0) {
+
+                            Prefs!!.state_change_5 = diffValue
+                            textView.text = increase_decrease_format(diffValue)
+
+                        } else {
+
+                            textView.text = increase_decrease_format(diffValue)
+                        }
+                    }
                 }
             }
 
@@ -198,8 +308,6 @@ class StatesActivity : AppCompatActivity() {
             }
         })
         serviceAPI.execute()
-
-        return newDifference
 
     }
 
@@ -239,7 +347,7 @@ class StatesActivity : AppCompatActivity() {
                 mActivity as FragmentActivity
 
                 val bottomSheetDialog = ModalBottomSheet(ngHighlights.highlights!!)
-                bottomSheetDialog.show(this@StatesActivity.mActivity.supportFragmentManager, ModalBottomSheet::class.java.simpleName)
+                bottomSheetDialog.show(this@NewHomeActivity.mActivity.supportFragmentManager, ModalBottomSheet::class.java.simpleName)
 
             }
 

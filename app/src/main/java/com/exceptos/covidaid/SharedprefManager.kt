@@ -153,30 +153,6 @@ object SharedprefManager {
             }
         }
 
-    var SharedPreferences.state_change_6
-        get() = getInt("sc_6", 0)
-        set(value) {
-            editMe {
-                it.putInt("sc_6", value)
-            }
-        }
-
-    var SharedPreferences.state_change_7
-        get() = getInt("sc_7", 0)
-        set(value) {
-            editMe {
-                it.putInt("sc_7", value)
-            }
-        }
-
-    var SharedPreferences.state_change_8
-        get() = getInt("sc_8", 0)
-        set(value) {
-            editMe {
-                it.putInt("sc_8", value)
-            }
-        }
-
     var SharedPreferences.clearValues
         get() = { }
         set(value) {

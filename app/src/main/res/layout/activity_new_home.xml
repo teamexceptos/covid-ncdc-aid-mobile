@@ -9,7 +9,7 @@
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@android:color/holo_green_light">
+        android:background="#5CAC31">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="45dp"
                 android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -50,14 +51,35 @@
                     android:textSize="21sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView4"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:text="Total Summary"
-                android:textColor="@android:color/white"
-                android:textSize="32sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="Total Summary"
+                    android:textColor="@android:color/white"
+                    android:textSize="32sp" />
+
+                <TextView
+                    android:id="@+id/home_highlights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/bg_round_outline"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
+                    android:text="Highlights"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>
@@ -83,7 +105,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="15dp"
                     app:cardCornerRadius="14dp"
                     app:cardElevation="10dp"
                     app:cardUseCompatPadding="true">
@@ -100,7 +121,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:text="Total Cases"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -112,7 +134,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="4,151"
                                 android:textColor="@android:color/black"
                                 android:textSize="28sp" />
 
@@ -131,7 +152,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginRight="15dp"
                     android:orientation="vertical">
 
@@ -141,7 +161,7 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
@@ -161,7 +181,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="12dp"
                                     android:text="Active Cases"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/active_cases"
@@ -180,7 +201,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
@@ -200,7 +221,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="12dp"
                                     android:text="Total Discharged"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/discharged"
@@ -225,7 +247,7 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
@@ -245,7 +267,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="12dp"
                                     android:text="Total Deaths"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/death"
@@ -264,7 +287,7 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                            android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="15dp"
                             android:layout_weight="1"
@@ -284,7 +307,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="12dp"
                                     android:text="Samples Tested"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
 
                                 <TextView
                                     android:id="@+id/samples_tested"
@@ -306,6 +330,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -331,13 +356,15 @@
                                 android:padding="5dp"
                                 android:text="see all"
                                 android:textAlignment="textEnd"
+                                android:textColor="@android:color/black"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
                         <HorizontalScrollView
                             android:id="@+id/top_states_scroll_view"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:scrollbarThumbHorizontal="@null">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -365,8 +392,9 @@
                                             android:id="@+id/state_1"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
+                                            android:layout_marginBottom="7dp"
+                                            android:textColor="@android:color/black"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/state_1_new"
@@ -374,7 +402,6 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="5dp"
                                             android:layout_marginBottom="5dp"
-                                            android:text="+0"
                                             android:textColor="@android:color/black"
                                             android:textSize="23sp" />
 
@@ -406,8 +433,9 @@
                                             android:id="@+id/state_2"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
+                                            android:layout_marginBottom="7dp"
+                                            android:textColor="@android:color/black"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/state_2_new"
@@ -415,7 +443,6 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="5dp"
                                             android:layout_marginBottom="5dp"
-                                            android:text="+0"
                                             android:textColor="@android:color/black"
                                             android:textSize="23sp" />
 
@@ -447,8 +474,9 @@
                                             android:id="@+id/state_3"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
+                                            android:layout_marginBottom="7dp"
+                                            android:textColor="@android:color/black"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/state_3_new"
@@ -456,7 +484,6 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="5dp"
                                             android:layout_marginBottom="5dp"
-                                            android:text="+0"
                                             android:textColor="@android:color/black"
                                             android:textSize="23sp" />
 
@@ -488,8 +515,9 @@
                                             android:id="@+id/state_4"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
+                                            android:layout_marginBottom="7dp"
+                                            android:textColor="@android:color/black"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/state_4_new"
@@ -497,7 +525,6 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="5dp"
                                             android:layout_marginBottom="5dp"
-                                            android:text="+0"
                                             android:textColor="@android:color/black"
                                             android:textSize="23sp" />
 
@@ -529,8 +556,9 @@
                                             android:id="@+id/state_5"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
+                                            android:layout_marginBottom="7dp"
+                                            android:textColor="@android:color/black"
+                                            android:textStyle="bold" />
 
                                         <TextView
                                             android:id="@+id/state_5_new"
@@ -538,130 +566,6 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="5dp"
                                             android:layout_marginBottom="5dp"
-                                            android:text="+0"
-                                            android:textColor="@android:color/black"
-                                            android:textSize="23sp" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="new" />
-                                    </LinearLayout>
-                                </androidx.cardview.widget.CardView>
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="9dp"
-                                    app:cardBackgroundColor="#32D3C3C3"
-                                    app:cardCornerRadius="14dp"
-                                    app:cardElevation="0dp">
-
-                                    <LinearLayout
-                                        android:layout_width="100dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginRight="20dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:id="@+id/state_6"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
-
-                                        <TextView
-                                            android:id="@+id/state_6_new"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="5dp"
-                                            android:layout_marginBottom="5dp"
-                                            android:text="+0"
-                                            android:textColor="@android:color/black"
-                                            android:textSize="23sp" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="new" />
-                                    </LinearLayout>
-                                </androidx.cardview.widget.CardView>
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="9dp"
-                                    app:cardBackgroundColor="#32D3C3C3"
-                                    app:cardCornerRadius="14dp"
-                                    app:cardElevation="0dp">
-
-                                    <LinearLayout
-                                        android:layout_width="100dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginRight="20dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:id="@+id/state_7"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
-
-                                        <TextView
-                                            android:id="@+id/state_7_new"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="5dp"
-                                            android:layout_marginBottom="5dp"
-                                            android:text="+0"
-                                            android:textColor="@android:color/black"
-                                            android:textSize="23sp" />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="new" />
-                                    </LinearLayout>
-                                </androidx.cardview.widget.CardView>
-
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_margin="9dp"
-                                    app:cardBackgroundColor="#32D3C3C3"
-                                    app:cardCornerRadius="14dp"
-                                    app:cardElevation="0dp">
-
-                                    <LinearLayout
-                                        android:layout_width="100dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginRight="20dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:id="@+id/state_8"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="Lagos"
-                                            android:textColor="@android:color/black" />
-
-                                        <TextView
-                                            android:id="@+id/state_8_new"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="5dp"
-                                            android:layout_marginBottom="5dp"
-                                            android:text="+0"
                                             android:textColor="@android:color/black"
                                             android:textSize="23sp" />
 
