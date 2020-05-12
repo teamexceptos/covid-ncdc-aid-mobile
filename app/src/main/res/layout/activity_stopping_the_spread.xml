@@ -14,8 +14,11 @@
             android:id="@+id/img_back_pressed"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="7dp"
-            app:srcCompat="@drawable/ic_back_black_24dp" />
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="17dp"
+            app:srcCompat="@drawable/ic_circle_back_press" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -36,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:text="Have you washed your hands yet? Let's do."
+                android:text="Washing your hands"
                 android:textColor="@android:color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />

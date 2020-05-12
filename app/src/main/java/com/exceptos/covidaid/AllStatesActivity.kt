@@ -80,28 +80,17 @@ class AllStatesActivity : AppCompatActivity() {
 
             override fun onItemClick(view: View, position: Int) {
 
-                if(progress_ng_data.visibility != View.VISIBLE) {
+                val intent = Intent(mActivity, NewStateDetailsActivity::class.java)
 
-                    val intent = Intent(mActivity, StateDetailsActivity::class.java)
+                if(ArrayList(ng_states)[position] == "FCT - Abuja") {
 
-                    if(ng != null) {
-                        intent.putExtra("ng", ng)
-                    }
+                    intent.putExtra("state", "fct")
+                    startActivity(intent)
 
-                    if(ArrayList(ng_states)[position] == "FCT - Abuja") {
+                } else  {
 
-                        intent.putExtra("state", "fct")
-                        startActivity(intent)
-
-                    } else  {
-
-                        intent.putExtra("state", ArrayList(ng_states)[position])
-                        startActivity(intent)
-                    }
-
-                } else {
-
-                    Toast.makeText(mActivity, "NCDC Data is still loading, Check your connection or wait alittle", Toast.LENGTH_LONG).show()
+                    intent.putExtra("state", ArrayList(ng_states)[position])
+                    startActivity(intent)
                 }
 
             }
