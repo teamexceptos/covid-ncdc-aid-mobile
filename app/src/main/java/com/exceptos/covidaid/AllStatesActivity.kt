@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.exceptos.covidaid.models.ng_model
-import kotlinx.android.synthetic.main.activity_state.*
+import kotlinx.android.synthetic.main.all_states.*
 
 class AllStatesActivity : AppCompatActivity() {
 

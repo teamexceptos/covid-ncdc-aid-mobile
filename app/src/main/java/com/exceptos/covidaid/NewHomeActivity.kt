@@ -82,7 +82,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                             if(Prefs.total_comfired_cases != turntoInt(ngModel.No_Confirmed_cases!!)) {
 
-                                comfired_cases_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_Confirmed_cases!!), old = Prefs.total_comfired_cases)/100)
+                                comfired_cases_perc.text = increase_decrease_format_with_perc((difference(new = turntoInt(ngModel.No_Confirmed_cases!!), old = Prefs.total_comfired_cases).toDouble()/100))
                                 Prefs.total_comfired_cases_perc = comfired_cases_perc.text.toString()
 
                             } else {
@@ -92,7 +92,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                             if(Prefs.total_active_cases != turntoInt(ngModel.Active_cases!!)) {
 
-                                active_cases_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.Active_cases!!), old = Prefs.total_active_cases)/100)
+                                active_cases_perc.text = increase_decrease_format_with_perc((difference(new = turntoInt(ngModel.Active_cases!!), old = Prefs.total_active_cases).toDouble()/100))
                                 Prefs.total_active_cases_perc = active_cases_perc.text.toString()
 
                             } else {
@@ -102,7 +102,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                             if(Prefs.total_discharged != turntoInt(ngModel.No_Discharged!!)) {
 
-                                discharged_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_Discharged!!), old = Prefs.total_discharged)/100)
+                                discharged_perc.text = increase_decrease_format_with_perc((difference(new = turntoInt(ngModel.No_Discharged!!), old = Prefs.total_discharged).toDouble()/100))
                                 Prefs.total_discharged_perc = discharged_perc.text.toString()
 
                             } else {
@@ -112,7 +112,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                             if(Prefs.total_sample_tested != turntoInt(ngModel.No_Samples_Tested!!)) {
 
-                                samples_tested_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_Samples_Tested!!), old = Prefs.total_sample_tested)/100)
+                                samples_tested_perc.text = increase_decrease_format_with_perc((difference(new = turntoInt(ngModel.No_Samples_Tested!!), old = Prefs.total_sample_tested).toDouble()/100))
                                 Prefs.total_sample_tested_perc = samples_tested_perc.text.toString()
 
                             } else {
@@ -122,7 +122,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                             if(Prefs.total_deaths != turntoInt(ngModel.No_of_Deaths!!)) {
 
-                                death_perc.text = increase_decrease_format_with_perc(difference(new = turntoInt(ngModel.No_of_Deaths!!), old = Prefs.total_deaths)/100)
+                                death_perc.text = increase_decrease_format_with_perc((difference(new = turntoInt(ngModel.No_of_Deaths!!), old = Prefs.total_deaths).toDouble()/100))
                                 Prefs.total_deaths_perc = death_perc.text.toString()
 
                             } else {
@@ -182,9 +182,9 @@ class NewHomeActivity : AppCompatActivity() {
         return value.trim().replace(",", "").toInt()
     }
 
-    fun increase_decrease_format_with_perc(value: Int) : String {
+    fun increase_decrease_format_with_perc(value: Double) : String {
 
-        return if(value >= 0) {
+        return if(value >= 0.0) {
 
             "+$value%"
 
