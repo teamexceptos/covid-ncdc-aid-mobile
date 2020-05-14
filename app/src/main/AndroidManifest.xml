@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         android:hardwareAccelerated="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".NewHomeActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,6 +26,8 @@
         <activity android:name=".AllStatesActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".NewStateDetailsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NewHomeActivity"
             android:screenOrientation="portrait"/>
     </application>
 </manifest>

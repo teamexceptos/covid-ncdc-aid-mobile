@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -128,7 +128,7 @@
                             android:id="@+id/textView9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
+                            android:layout_marginBottom="9dp"
                             android:text="Total Cases"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -366,6 +366,7 @@
                                 android:text="see all"
                                 android:textAlignment="textEnd"
                                 android:textColor="@android:color/black"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
