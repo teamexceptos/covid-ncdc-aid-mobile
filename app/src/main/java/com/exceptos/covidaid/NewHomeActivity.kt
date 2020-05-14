@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -209,7 +210,6 @@ class NewHomeActivity : AppCompatActivity() {
     @SuppressLint("DefaultLocale", "SetTextI18n")
     fun topStates(state: String, textView: TextView, labeltextView: TextView, oldValue: Int) {
 
-        var newDifference = 0
         val Prefs = customPreference(this, "covid_data")
 
         val serviceAPI = ServiceAPI(state, object : OnAPIDataGotten {
@@ -226,8 +226,10 @@ class NewHomeActivity : AppCompatActivity() {
 
                         if(diffValue != 0) {
 
-                            Prefs!!.state_change_1 = diffValue
+                            Prefs!!.state_change_1 = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
                             textView.text = increase_decrease_format(diffValue)
+
+                            Log.i("lagos_data_change", diffValue.toString() + " "+ turntoInt(stateModel.No_of_Lab_Confirmed_cases!!))
 
                         } else {
 
@@ -241,7 +243,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                         if(diffValue != 0) {
 
-                            Prefs!!.state_change_2 = diffValue
+                            Prefs!!.state_change_2 = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
                             textView.text = increase_decrease_format(diffValue)
 
                         } else {
@@ -256,7 +258,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                         if(diffValue != 0) {
 
-                            Prefs!!.state_change_3 = diffValue
+                            Prefs!!.state_change_3 = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
                             textView.text = increase_decrease_format(diffValue)
 
                         } else {
@@ -270,7 +272,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                         if(diffValue != 0) {
 
-                            Prefs!!.state_change_4 = diffValue
+                            Prefs!!.state_change_4 = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
                             textView.text = increase_decrease_format(diffValue)
 
                         } else {
@@ -284,7 +286,7 @@ class NewHomeActivity : AppCompatActivity() {
 
                         if(diffValue != 0) {
 
-                            Prefs!!.state_change_5 = diffValue
+                            Prefs!!.state_change_5 = turntoInt(stateModel.No_of_Lab_Confirmed_cases!!)
                             textView.text = increase_decrease_format(diffValue)
 
                         } else {
